@@ -6,9 +6,8 @@
  * Time: 17:42
  */
 namespace App\Annotation;
-use Doctrine\Common\Annotations\Annotation\Target;
-use Hyperf\Di\Annotation\AbstractAnnotation;
 
+use Hyperf\Di\Annotation\AbstractAnnotation;
 /**
  * @Annotation
  * @Target({"CLASS", "METHOD"})
