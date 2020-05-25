@@ -9,7 +9,7 @@ error_reporting(E_ALL); // 设置错误等级为E_ALL
 ! defined('BASE_PATH') && define('BASE_PATH', dirname(__DIR__, 1)); // 定义根目录常量
 ! defined('SWOOLE_HOOK_FLAGS') && define('SWOOLE_HOOK_FLAGS', SWOOLE_HOOK_ALL);
 
-require BASE_PATH . '/../vendor/autoload.php';
+require BASE_PATH . '/vendor/autoload.php';
 
 // Self-called anonymous function that creates its own scope and keep the global namespace clean.
 (function () {
