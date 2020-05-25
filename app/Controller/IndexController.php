@@ -13,7 +13,7 @@ use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpServer\Annotation\AutoController;
 /**
  * @AutoController()
- * @Foo(bar="123")
+ * @Foo("123")
  */
 class IndexController
 {
