@@ -1,29 +1,25 @@
 <?php
-
-declare(strict_types=1);
 /**
- * This file is part of Hyperf.
- *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * Created by PhpStorm.
+ * User: lyy
+ * Date: 2020/5/25
+ * Time: 17:46
  */
 
 namespace App\Controller;
+use App\Annotation\Foo;
+use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpServer\Annotation\AutoController;
+
 /**
  * @AutoController()
+ * @Foo(bar="123")
  */
-class IndexController extends AbstractController
+class IndexController
 {
     public function index()
     {
-        $user = $this->request->input('user', 'Hyperf');
-        $method = $this->request->getMethod();
-        return [
-            'method' => $method,
-            'message' => "Hello {$user}.",
-        ];
+        var_dump(AnnotationCollector::getClassByAnnotation(Foo::class));
+        return 1;
     }
 }
