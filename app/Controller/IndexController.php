@@ -7,10 +7,10 @@
  */
 
 namespace App\Controller;
+
 use App\Annotation\Foo;
 use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpServer\Annotation\AutoController;
-
 /**
  * @AutoController()
  * @Foo(bar="123")
