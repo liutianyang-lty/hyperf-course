@@ -16,18 +16,30 @@ use Hyperf\Utils\Context;
  */
 class CoController
 {
-    private $foo = 1;
-
     public function get()
     {
-        return Context::get('foo', 'null');
+        //return Context::get('foo', 'null'); // 协程上下文获取 防止协程之间数据混淆
+        return $this->foo;
     }
 
     public function update(RequestInterface $request)
     {
         $foo = $request->input("foo");
-        Context::set('foo', $foo);
-        //$this->foo = $foo;
-        return Context::get('foo');
+        //Context::set('foo', $foo);
+        $this->foo = $foo;
+        //return Context::get('foo');
+        return $this->foo;
+    }
+
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+        return Context::get(__CLASS__ . ':' . $name);
+    }
+
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+        Context::set(__CLASS__ . ':' . $name, $value);
     }
 }
