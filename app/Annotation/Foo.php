@@ -10,7 +10,7 @@ namespace App\Annotation;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 /**
  * @Annotation
- * @Target({"CLASS", "METHOD"})
+ * @Target({"CLASS", "METHOD"}) // 表示Foo这个注解是 类级别的 还是 方法级别的 或是 类属性级别的
  */
 class Foo extends AbstractAnnotation
 {

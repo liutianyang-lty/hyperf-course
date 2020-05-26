@@ -13,13 +13,13 @@ use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpServer\Annotation\AutoController;
 /**
  * @AutoController()
- * @Foo(bar="5")
+ * @Foo(bar="5") //给注解传递参数
  */
 class IndexController
 {
     public function index()
     {
-        //var_dump(AnnotationCollector::getClassByAnnotation(Foo::class));
+        var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
         return 3;
     }
 }
