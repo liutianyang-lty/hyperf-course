@@ -20,6 +20,6 @@ class IndexController
     public function index()
     {
         var_dump(AnnotationCollector::getClassByAnnotation(Foo::class));
-        return 1;
+        return 2;
     }
 }
