@@ -41,16 +41,20 @@ class IndexAspect extends AbstractAspect
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
         //在IndexControlelr中的index方法执行前 写逻辑
-        var_dump("before\n");
+        //var_dump("before\n");
         // TODO something
 
         $result = $proceedingJoinPoint->process();
 
         //在IndexControlelr中的index方法执行后 写逻辑
         // TODO something
-        var_dump("after\n");
+        //var_dump("after\n");
 
         //对方法返回结果进行处理
-        return "before" . $result . "after";
+        $bar = 0;
+        $foo = $proceedingJoinPoint->getAnnotationMetadata()->class[Foo::class]; //拿到Foo注解类
+        $bar = $foo->bar; //取出注解中传递的参数
+        //return "before" . $result . "after";
+        return $result + $bar;
     }
 }
