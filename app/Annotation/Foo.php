@@ -27,7 +27,8 @@ class Foo extends AbstractAnnotation
 
     public function __construct($value = null)
     {
-        var_dump($value);
+        //var_dump($value);
         parent::__construct($value);
+        $this->bindMainProperty('bar', $value);
     }
 }
