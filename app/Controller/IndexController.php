@@ -13,7 +13,7 @@ use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpServer\Annotation\AutoController;
 /**
  * @AutoController()
- * @Foo("5") //给注解传递参数
+ * @Foo(bar="123", baz="321") //给注解传递参数
  */
 class IndexController
 {
