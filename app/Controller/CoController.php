@@ -22,7 +22,7 @@ class CoController
         return $this->foo;
     }
 
-    public function index(RequestInterface $request)
+    public function update(RequestInterface $request)
     {
         $foo = $request->input("foo");
         $this->foo = $foo;
