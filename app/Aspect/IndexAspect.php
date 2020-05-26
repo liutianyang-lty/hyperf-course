@@ -29,6 +29,6 @@ class IndexAspect extends AbstractAspect
         var_dump(__CLASS__);
         // TODO: Implement process() method.
         $result = $proceedingJoinPoint->process();
-        return $result;
+        return "before" . $result . "after";
     }
 }
