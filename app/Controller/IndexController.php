@@ -13,13 +13,13 @@ use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpServer\Annotation\AutoController;
 /**
  * @AutoController()
- * @Foo("123")
+ * @Foo()
  */
 class IndexController
 {
     public function index()
     {
-        var_dump(AnnotationCollector::getClassByAnnotation(Foo::class));
+        //var_dump(AnnotationCollector::getClassByAnnotation(Foo::class));
         return 3;
     }
 }

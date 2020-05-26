@@ -9,6 +9,7 @@
 namespace App\Aspect;
 
 
+use App\Annotation\Foo;
 use App\Controller\IndexController;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
@@ -19,9 +20,22 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
  */
 class IndexAspect extends AbstractAspect
 {
-    //定义要切入的类
-    public $classes = [
-        IndexController::class . "::" . "index",
+    /**
+     * 定义要切入的类或方法
+     * $classes 属性
+     * @var array
+     */
+//    public $classes = [
+//        IndexController::class . "::" . "index", // 切入IndexController类中的index方法
+//        //IndexController::class // 切入IndexController类中的所有方法
+//    ];
+
+    /**
+     * 切入Foo注解
+     * @var array
+     */
+    public $annotations = [
+        Foo::class,
     ];
 
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
