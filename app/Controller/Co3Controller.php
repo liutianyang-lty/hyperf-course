@@ -68,6 +68,7 @@ class Co3Controller
         });
         var_dump(7);
         $result[] = $channel->pop();
+        var_dump(8);
         $result[] = $channel->pop();
         return $result;
 
