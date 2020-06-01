@@ -11,6 +11,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Utils\Coroutine;
+use Swoole\Coroutine\Channel;
 
 /**
  * Class Co3Controller
@@ -47,16 +48,27 @@ class Co3Controller
 //        });
 
         //方式三：使用co()全局函数创建
-//        co(function () {
-//            sleep(1);
-//            var_dump(1);
-//        });
+        //使用协程并行的请求sleep()方法
+        $channel = new Channel();
+        co(function () use ($channel) {
+            $client = $this->clientFactory->create();
+            $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+            $channel->push(123);
+        });
+        co(function () use ($channel) {
+            $client = $this->clientFactory->create();
+            $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+            $channel->push(321);
+        });
+        $result[] = $channel->pop();
+        $result[] = $channel->pop();
+        return $result;
 
         //不使用协程的情况下请求sleep()方法
-        $client = $this->clientFactory->create();
-        $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
-        $client = $this->clientFactory->create();
-        $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
-        return 1;
+//        $client = $this->clientFactory->create();
+//        $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+//        $client = $this->clientFactory->create();
+//        $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+//        return 1;
     }
 }
