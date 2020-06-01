@@ -11,6 +11,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Utils\Coroutine;
+use Hyperf\Utils\WaitGroup;
 use Swoole\Coroutine\Channel;
 
 /**
@@ -49,27 +50,35 @@ class Co3Controller
 
         //方式三：使用co()全局函数创建
         //使用协程并行的请求sleep()方法
-        $channel = new Channel();
-        var_dump(1);
-        co(function () use ($channel) {
+        //$channel = new Channel();
+        //var_dump(1);
+        $wg = new WaitGroup();
+        $result = [];
+        $wg->add(2); //有几个协程，数字就是几
+        co(function () use ($wg, &$result) {
             $client = $this->clientFactory->create();
-            var_dump(2);
+            //var_dump(2);
             $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
-            var_dump(3);
-            $channel->push(123);
+            $result[] = 123;
+            $wg->done();
+            //var_dump(3);
+            //$channel->push(123);
         });
-        var_dump(4);
-        co(function () use ($channel) {
+        //var_dump(4);
+        co(function () use ($wg, &$result) {
             $client = $this->clientFactory->create();
-            var_dump(5);
+            //var_dump(5);
             $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
-            var_dump(6);
-            $channel->push(321);
+            $result[] = 321;
+            $wg->done();
+           // var_dump(6);
+            //$channel->push(321);
         });
-        var_dump(7);
-        $result[] = $channel->pop();
-        var_dump(8);
-        $result[] = $channel->pop();
+        //var_dump(7);
+        //$result[] = $channel->pop();
+        //var_dump(8);
+        //$result[] = $channel->pop();
+        $wg->wait();
         return $result;
 
         //不使用协程的情况下请求sleep()方法
