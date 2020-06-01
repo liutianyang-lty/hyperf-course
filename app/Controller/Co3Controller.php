@@ -7,6 +7,7 @@
  */
 
 namespace App\Controller;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Utils\Coroutine;
@@ -17,6 +18,11 @@ use Hyperf\Utils\Coroutine;
  */
 class Co3Controller
 {
+    /**
+     * @Inject()
+     * @var \Hyperf\Guzzle\ClientFactory //用来创建一个http客户端
+     */
+    private $clientFactory;
 
     public function sleep(RequestInterface $request)
     {
@@ -41,10 +47,16 @@ class Co3Controller
 //        });
 
         //方式三：使用co()全局函数创建
-        co(function () {
-            sleep(1);
-            var_dump(1);
-        });
+//        co(function () {
+//            sleep(1);
+//            var_dump(1);
+//        });
 
+        //不使用协程的情况下请求sleep()方法
+        $client = $this->clientFactory->create();
+        $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+        $client = $this->clientFactory->create();
+        $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+        return 1;
     }
 }
