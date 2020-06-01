@@ -50,16 +50,23 @@ class Co3Controller
         //方式三：使用co()全局函数创建
         //使用协程并行的请求sleep()方法
         $channel = new Channel();
+        var_dump(1);
         co(function () use ($channel) {
             $client = $this->clientFactory->create();
+            var_dump(2);
             $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+            var_dump(3);
             $channel->push(123);
         });
+        var_dump(4);
         co(function () use ($channel) {
             $client = $this->clientFactory->create();
+            var_dump(5);
             $client->get('127.0.0.1:9501/co3/sleep?seconds=2');
+            var_dump(6);
             $channel->push(321);
         });
+        var_dump(7);
         $result[] = $channel->pop();
         $result[] = $channel->pop();
         return $result;
