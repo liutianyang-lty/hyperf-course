@@ -24,6 +24,7 @@ class BazMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        echo 3;
         return $handler->handle($request);
     }
 }
