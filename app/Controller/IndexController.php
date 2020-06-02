@@ -19,14 +19,17 @@ use Hyperf\HttpServer\Annotation\Middlewares;
 
 /**
  * @AutoController()
+ * //通过注解使用中间件
  * @Middlewares(
- *     @Middleware(FooMiddleware::class),
  *     @Middleware(BarMiddleware::class),
  *     @Middleware(BazMiddleware::class)
  * )
  */
 class IndexController
 {
+    /**
+     * @Middleware(FooMiddleware::class)
+     */
     public function index()
     {
         //var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
