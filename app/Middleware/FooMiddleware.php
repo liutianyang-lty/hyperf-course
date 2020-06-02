@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -27,6 +28,7 @@ class FooMiddleware implements MiddlewareInterface
         echo 1;
         $response =  $handler->handle($request);
         echo 4;
-        return $response;
+        $body = $response->getBody()->getContents();
+        return $response->withBody(new SwooleStream($body . "foo"));
     }
 }
