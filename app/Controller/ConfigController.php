@@ -47,4 +47,10 @@ class ConfigController
     {
         return $this->bar;
     }
+
+    public function config()
+    {
+        //通过config全局函数获取配置
+        return config('foo.bar', 123);
+    }
 }
