@@ -18,12 +18,19 @@ use Hyperf\HttpServer\Annotation\AutoController;
 class ConfigController
 {
     /**
+     * //通过依赖注入的方式获取配置
      * @Inject()
      * @var ConfigInterface
      */
     private $config;
 
     public function inject()
+    {
+        //通过依赖注入的方式获取config.php文件中的配置内容
+        return $this->config->get('foo.bar', 123);
+    }
+
+    public function inject_1()
     {
         return $this->config->get('foo.bar', 123);
     }

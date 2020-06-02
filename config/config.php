@@ -27,7 +27,7 @@ return [
             LogLevel::WARNING,
         ],
     ],
-    'foo' => [
-        'bar' => 321,
-    ]
+//    'foo' => [
+//        'bar' => 321,
+//    ]
 ];
