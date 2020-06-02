@@ -30,8 +30,8 @@ class IndexController
 {
     public function index()
     {
-//        var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
-//        return 3;
+        var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
+        //return 3;
         return 'index';
     }
 }
