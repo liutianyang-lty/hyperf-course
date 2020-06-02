@@ -7,6 +7,7 @@
  */
 
 namespace App\Controller;
+use Hyperf\Config\Annotation\Value;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -24,6 +25,12 @@ class ConfigController
      */
     private $config;
 
+    /**
+     * 通过Value注解获取配置内容
+     * @Value("foo.bar")
+     */
+    private $bar;
+
     public function inject()
     {
         //通过依赖注入的方式获取config.php文件中的配置内容
@@ -32,6 +39,12 @@ class ConfigController
 
     public function inject_1()
     {
+        //通过依赖注入的方式获取autoload目录下配置文件中的内容
         return $this->config->get('foo.bar', 123);
+    }
+
+    public function value()
+    {
+        return $this->bar;
     }
 }
