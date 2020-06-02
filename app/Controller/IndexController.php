@@ -19,7 +19,6 @@ use Hyperf\HttpServer\Annotation\Middlewares;
 
 /**
  * @AutoController()
- * @Foo(bar="123") //给注解传递参数
  * @Middlewares(
  *     @Middleware(FooMiddleware::class),
  *     @Middleware(BarMiddleware::class),
@@ -30,7 +29,7 @@ class IndexController
 {
     public function index()
     {
-        var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
+        //var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
         //return 3;
         return 'index';
     }
