@@ -16,6 +16,7 @@ use App\Middleware\BarMiddleware;
 use App\Middleware\BazMiddleware;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\Middlewares;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
  * @AutoController()
@@ -38,8 +39,10 @@ class IndexController
 //        return 'index';
 //    }
 
-    public function index()
+    public function index(RequestInterface $request) //这里的$request对象是从协程上下文中取到的
     {
+        $fooValue = $request->getAttribute('foo');
+        var_dump($fooValue);
         return 'index';
     }
 }

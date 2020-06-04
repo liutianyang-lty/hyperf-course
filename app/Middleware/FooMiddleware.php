@@ -26,6 +26,7 @@ class FooMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         echo 1;
+        $request = $request->withAttribute('foo', 1);
         $response =  $handler->handle($request);
         echo 4;
         $body = $response->getBody()->getContents();
