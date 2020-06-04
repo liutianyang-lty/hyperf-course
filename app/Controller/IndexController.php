@@ -19,7 +19,7 @@ use Hyperf\HttpServer\Annotation\Middlewares;
 
 /**
  * @AutoController()
- * //通过注解使用中间件
+ * //在类上定义使用中间件(当类和方法上都有中间件时，会先执行类上的中间件；当有全局中间件时，会先执行全局中间件)
  * @Middlewares(
  *     @Middleware(BarMiddleware::class),
  *     @Middleware(BazMiddleware::class)
@@ -27,13 +27,19 @@ use Hyperf\HttpServer\Annotation\Middlewares;
  */
 class IndexController
 {
-    /**
-     * @Middleware(FooMiddleware::class)
-     */
+//    /**
+//     * //在方法上定义中间件
+//     * @Middleware(FooMiddleware::class)
+//     */
+//    public function index()
+//    {
+//        //var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
+//        //return 3;
+//        return 'index';
+//    }
+
     public function index()
     {
-        //var_dump(AnnotationCollector::getClassByAnnotation(Foo::class)); //获取定义的注解和具体属性
-        //return 3;
         return 'index';
     }
 }
