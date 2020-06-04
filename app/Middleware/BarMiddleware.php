@@ -25,6 +25,7 @@ class BarMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         echo 2;
+        var_dump($request->getAttribute('foo'));
         $response =  $handler->handle($request);
         echo 5;
         return $response;
